@@ -590,3 +590,25 @@ log:
 # convert this to "jsmith".
 
 #downcase_username: true
+
+# Set the cookie domain for the TicketGeneratingTicket cookie tgt. 
+# (Defaults to current host)
+# 
+# If you are unable to use CASClient::Frameworks::Rails::GatewayFilter to
+# check for existing SSO sessions, enable the cookie_domain and call a 
+# before_filter to check if the cookie 'tgt' is present. If it is, 
+# authenticate the user.
+#
+# Example usage:
+#   cas.server.com
+#   server.com
+#   one.server.com 
+#
+# Set cookie_domain: 'server.com'
+# 
+# After a user signs in at one.server.com, the tgt cookie is set to host 
+# server.com. If the user navigates to server.com, a before_filter can check
+# to see if the tgt cookie is set and authenticate the user.
+
+#cookie_domain:
+

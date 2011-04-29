@@ -444,7 +444,7 @@ module CASServer
 
           # 3.6 (ticket-granting cookie)
           tgt = generate_ticket_granting_ticket(@username, extra_attributes)
-          response.set_cookie('tgt', tgt.to_s)
+          response.set_cookie('tgt', :value => tgt.to_s, :domain => config[:cookie_domain])
 
           $LOG.debug("Ticket granting cookie '#{request.cookies['tgt'].inspect}' granted to #{@username.inspect}")
 
@@ -502,10 +502,8 @@ module CASServer
       @continue_url = params['url']
 
       @gateway = params['gateway'] == 'true' || params['gateway'] == '1'
-
       tgt = CASServer::Model::TicketGrantingTicket.find_by_ticket(request.cookies['tgt'])
-
-      response.delete_cookie 'tgt'
+      response.delete_cookie('tgt', :domain => config[:cookie_domain])
 
       if tgt
         CASServer::Model::TicketGrantingTicket.transaction do
