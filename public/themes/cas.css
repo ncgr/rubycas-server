@@ -50,6 +50,10 @@ input.button {
   vertical-align: top;
 }
 
+.left {
+	text-align: left;
+	float: left;
+}
 
 #username,
 #password {
